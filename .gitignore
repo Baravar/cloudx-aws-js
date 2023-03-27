@@ -9,6 +9,7 @@
 
 # dependencies
 /node_modules
+/jspm_packages
 
 # profiling files
 chrome-profiler-events*.json
@@ -41,6 +42,7 @@ npm-debug.log
 yarn-error.log
 testem.log
 /typings
+.serverless
 
 # System Files
 .DS_Store

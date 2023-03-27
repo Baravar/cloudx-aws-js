@@ -4,7 +4,12 @@ Angular version: ~12.
 
 Repo maintainers:
 
-- [Sergey Gultyayev](https://github.com/gultyayev)
+- Maintained by [Artsiom Baravik](https://github.com/Baravar)
+- All credits for the original Fork source to [Sergey Gultyayev](https://github.com/gultyayev)
+
+Deployed to AWS using Serverless:
+- S3-website URL: http://ng-store-app.s3-website-us-east-1.amazonaws.com/ (expected to see 403 Access Denied)
+- CloudFront URL: https://d3lc6lhdpvhm1c.cloudfront.net/ (accessible Globally)
 
 ## The purpose
 
@@ -22,7 +27,7 @@ If you would like to help implementing some feature, you should ask the maintain
 
 ## Get up and running
 
-Prerequisites: NodeJS v14.20.x and higher
+Prerequisites: NodeJS v16.x and higher
 
 Follow the steps:
 
