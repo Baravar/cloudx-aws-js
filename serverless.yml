@@ -5,11 +5,6 @@ provider:
   name: aws
   runtime: nodejs16.x
 
-# functions:
-#   function1:
-#     handler: index.handler
-
-
 plugins:
   - serverless-finch
   - serverless-single-page-app-plugin

@@ -1,7 +1,7 @@
 <mat-card>
   <div mat-card-image class="img-container">
     <div class="img-container__inner">
-      <img src="https://source.unsplash.com/random?sig={{ index }}" alt="" />
+      <img [src]="product.image ? product.image : 'https://source.unsplash.com/random?sig=' + index" alt="{{product.description}}" />
     </div>
   </div>
 
@@ -12,6 +12,18 @@
   </mat-card-header>
 
   <mat-card-content>
+    <p *ngIf="product.size && product.size.length !== 0">
+      <span>Available in </span>
+      <span *ngFor="let size of product.size; let last = last">
+        <b>{{size}}</b>
+        <span *ngIf="!last">, </span>
+      </span>
+      <span> size(s)</span>
+    </p>
+
+    <p *ngIf="!product.size || product.size.length == 0">
+       Out of stock
+    </p>
     <p>{{ product.price | number: "1.2-2" | currency }}</p>
   </mat-card-content>
 
@@ -24,9 +36,16 @@
       color="accent"
       matTooltip="Add {{ product.title }} to cart"
       mat-icon-button
+      [disabled]="product.count === 0"
     >
       <mat-icon>shopping_cart</mat-icon>
     </button>
+
+    <span
+      *ngIf="product.count === 0"
+    >
+      Sold out
+    </span>
 
     <app-cart-count-controls
       #controls="countControls"
