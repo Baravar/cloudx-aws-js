@@ -1,5 +1,7 @@
 import { Injectable, Injector } from '@angular/core';
-import { EMPTY, Observable } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
+import { EMPTY, Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { ApiService } from '../../core/api.service';
 import { switchMap } from 'rxjs/operators';
 
@@ -29,17 +31,27 @@ export class ManageProductsService extends ApiService {
     );
   }
 
+  private handleError(error: HttpErrorResponse) {
+    const errorMessage = `Backend returned code ${error.status}, body was: ${error.error.message}`;
+    alert(errorMessage);
+
+    return throwError(() => new Error(errorMessage));
+  }
+
   private getPreSignedUrl(fileName: string): Observable<string> {
     const url = this.getUrl('import', 'import');
-    const authorization_token = localStorage.getItem('authorization_token') || '';
+    const authorization_token =
+      localStorage.getItem('authorization_token') || '';
 
-    return this.http.get<string>(url, {
-      params: {
-        name: fileName,
-      },
-      headers: {
-        authorization: authorization_token,
-      },
-    });
+    return this.http
+      .get<string>(url, {
+        params: {
+          name: fileName,
+        },
+        headers: {
+          authorization: authorization_token,
+        },
+      })
+      .pipe(catchError(this.handleError));
   }
 }
